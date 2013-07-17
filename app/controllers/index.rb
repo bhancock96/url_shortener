@@ -4,8 +4,11 @@ get '/' do
 end
 
 post '/urls' do
-  @url = Url.create(url: params[:url], click_count: 0)
+  @url = Url.new(url: params[:url], click_count: 0)
 
+  if @url.invalid?
+    @errors = @url.errors.messages
+  end
   # full_url: string, short_url: string, counter: integer
   erb :url
 end
@@ -13,7 +16,7 @@ end
 get '/:short_url' do
   @url = Url.find_by_short_url(params[:short_url])
   @url.click_count += 1
-  
+
   @url.save 
-  redirect "http://#{@url.url}"
+  redirect "#{@url.url}"
 end

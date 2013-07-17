@@ -1,7 +1,15 @@
-<%= @url.url %>
-<br>
-<%= @url.click_count %>
-<br>
-<%= @url.id %>
-<br>
-<%= @url.short_url %>
+<% if @errors %>
+  <%= erb :_errors, layout: false %>
+
+  <% else  %>
+  <%= @url.url %>
+  <br>
+  <%= @url.click_count %>
+  <br>
+  <%= @url.id %>
+  <br>
+  <%= @url.short_url %>
+
+<% end %>
+
+
